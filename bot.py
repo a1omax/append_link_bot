@@ -1,5 +1,6 @@
 import telebot
 import os
+from re import escape
 
 FILENAME = "config.txt"
 
@@ -33,6 +34,8 @@ def start(message):
 @bot.message_handler(content_types=["text", "audio", "voice", "video", "photo", "animation"])
 def post(message):
     text = message.text or message.caption or ""
+    text = escape(text)
+
     bot.send_message(chat_id=message.chat.id, text=text+ADD_TEXT)
 
 
